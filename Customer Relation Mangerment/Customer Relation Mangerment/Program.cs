@@ -16,7 +16,7 @@ namespace Customer_Relation_Mangerment
             bool Run = true;
             bool New = false;
             bool Current = false;
-            bool Contiune = false;
+            
             System.Collections.ArrayList Contactlist = new System.Collections.ArrayList();
             Contactlist.Add(new Contact() { Name = "SOS", PhoneNumber = "112", Email = "112.Alarm@Sverige.se" , Favorite = false});
             Contactlist.Add(new Contact() { Name = "Taxi Stockholm", PhoneNumber = "08150000", Email = "kund@taxistockholm.se", Favorite = false });
@@ -87,19 +87,20 @@ namespace Customer_Relation_Mangerment
                                 FavoriteCount++;
                             }
                         }
-                        Console.WriteLine("------------------");;
+                        Console.WriteLine("------------------"); ;
                         Console.WriteLine("You have total {0} contacts and {1} as marked favorite ", Contactlist.Count, FavoriteCount);
                         Console.WriteLine("For more infamtion of an contact, write in there name. Obs make sure you spell it right");
                         string Search = Console.ReadLine();
-
-                                    
-                        foreach(Contact SearchContact in Contactlist)
+                        Console.WriteLine(Search);
+                        bool FoundContact = false;
+                        foreach (Contact SearchContact in Contactlist)
                         {
-                            if(SearchContact.Name == Search)
+                            if (SearchContact.Name == Search)
                             {
+                                FoundContact = true;
                                 LastSelectedContact = SearchContact;// ifall om jag lägg till en funktion att ändra sin kontakt senare.
-                                Console.Write("\n{0}\n Phone number: {1} \n Email: {2} \n  ", SearchContact.Name , SearchContact.PhoneNumber , SearchContact.Email );
-                                if(SearchContact.Favorite == true)
+                                Console.Write("\n{0}\n Phone number: {1} \n Email: {2} \n  ", SearchContact.Name, SearchContact.PhoneNumber, SearchContact.Email);
+                                if (SearchContact.Favorite == true)
                                 {
                                     Console.Write("Contact type: Favorite");
                                 }
@@ -107,40 +108,47 @@ namespace Customer_Relation_Mangerment
                                 {
                                     Console.Write("Contact type: General");
                                 }
-                                
+                                Tryagain = false;
                             }
-                            else
+                        }
+                            bool Continue = false;
+                            //problem hittad!! Varje gång foreach hittar ej något så skrivs felsökningen ut.
+                        if (FoundContact == false) {
                             {
                                 Console.WriteLine("Contact could not be found! \n Make sure the spelling is right that include Capital letters and spaces");
                                 do
-                                {                                
-                                    
+                                {
+
                                     Console.WriteLine("Would you like to try again?(yes or no)");
                                     val = Console.ReadLine();
                                     Console.WriteLine(val);
                                     if (val == "yes" || val == "Yes")
                                     {
                                         Tryagain = true;
-                                        Contiune = true;
+                                        Continue = true;
+                                    }
+                                    if (val == "No" || val == "no")
+                                    {
+                                        Continue = true;
                                     }
                                     else
                                     {
                                         Console.WriteLine("Wrong input data, try again. Check you spelling!?");
                                     }
 
-                                } while (Contiune == false);
-                                Console.WriteLine("out");
+                                } while (Continue == false);
+                                    
+                                
                             }
-                        }
-                    } while (Tryagain == true) ;
+                        } 
 
-                
+
+
+                    } while (Tryagain == true);
+
 
                 }
-
-                    Run = false;
-
-             
+                Run = false;
             }
 
 
