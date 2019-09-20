@@ -47,20 +47,52 @@ namespace Customer_Relation_Mangerment
                     Console.WriteLine("For Checking the current contact list write in following keywords into the console: 'Current' or 'current' \n");
                     Userchoice = Console.ReadLine();
                 }
-            } while (option == false); 
-            while(Run == true)
+            } while (option == false);
+            int FavoriteCount = 0;
+            while (Run == true)
             {
                 if(New == true)
                 {
                     Console.WriteLine("Här kommer du kunna skapa en ny kontakt");
                     
                 }
-                if(Current == true)
+
+                if (Current == true)
                 {
-                    Console.WriteLine("Här skrivs kontakt listan ut");
+
+
+                    Console.WriteLine("------------------");
+                    Console.WriteLine("All Contacts: ");
+                    Console.WriteLine("------------------");
+                    foreach (Contact ListedContact in Contactlist)
+                    {
+                        Console.WriteLine(ListedContact.Name);
+                    }
+
+
+
+                    Console.WriteLine("------------------");
+                    Console.WriteLine("Favorite Contacts: ");
+                    Console.WriteLine("------------------");
+                    foreach (Contact state in Contactlist)
+                    {
+                        if (state.Favorite == true)
+                        {
+                            Console.WriteLine(state.Name);
+                            FavoriteCount++;
+                        }
+                    }
+                    Console.WriteLine("------------------");;
+                    Console.WriteLine("You have total {0} contacts and {1} as marked favorite ", Contactlist.Count, FavoriteCount);
+                    Console.WriteLine("For more infamtion of contact, write in there name. Obs make sure you spell it right");
+                    
                 }
-                Run = false;
+                    Run = false;
+
+             
             }
+
+
             Console.ReadLine();
             
             
