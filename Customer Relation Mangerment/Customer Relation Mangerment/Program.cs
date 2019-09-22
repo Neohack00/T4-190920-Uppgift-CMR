@@ -12,7 +12,7 @@ namespace Customer_Relation_Mangerment
         {
             Contact LastSelectedContact = new Contact();
             bool Tryagain = false;
-            string val;
+            string CurrentChoice;
             string NewContactChoice;
             bool Run = true;
             bool New = false;
@@ -174,13 +174,13 @@ namespace Customer_Relation_Mangerment
                                 {
 
                                     Console.WriteLine("Would you like to try again?(yes or no)");
-                                    val = Console.ReadLine();
-                                    if (val == "yes" || val == "Yes")
+                                    CurrentChoice = Console.ReadLine();
+                                    if (CurrentChoice == "yes" ||   CurrentChoice == "Yes")
                                     {
                                         Tryagain = true;
                                         Continue = true;
                                     }
-                                    if (val == "No" || val == "no")
+                                    if (CurrentChoice == "No" || CurrentChoice == "no")
                                     {
                                         Continue = true;
                                     }
@@ -199,7 +199,35 @@ namespace Customer_Relation_Mangerment
 
                     Current = false;
                 }
-                Run = false;
+                Continue = false;
+                Console.WriteLine("\n\n What do you want to do now? \nBelow here is some option you can select from. Simply type in specific word marked with ' ' . \n");
+                Current = false;
+                New = false;
+                do
+                {
+                    Console.WriteLine("\n'Quit' - to quit the program. \n'New' - to add a new contact \n'Show' - to show current contact list");
+                    Userchoice = Console.ReadLine();
+                    if (Userchoice == "Quit" || Userchoice == "quit")
+                    {
+                        Run = false;
+                        Continue = true;
+                    }
+                    else if (Userchoice == "new" || Userchoice == "New")
+                    {
+                        New = true;
+                        Continue = true;
+                    }
+                    else if (Userchoice == "Show" || Userchoice == "show")
+                    {
+                        Current = true;
+                        Continue = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Input data is incorrect! Please check your spelling and select one of the option listed below:");
+                    }
+                } while (Continue == false); ;
+                Console.ReadLine();
             }
 
 
