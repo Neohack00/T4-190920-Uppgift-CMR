@@ -142,27 +142,36 @@ namespace Customer_Relation_Mangerment
                         }
                         Console.WriteLine("------------------"); ;
                         Console.WriteLine("You have total {0} contacts and {1} as marked favorite ", Contactlist.Count, FavoriteCount);
-                        Console.WriteLine("For more information of an contact, write in their name. Obs make sure you spell it right");
+                        Console.WriteLine("For more information of an contact, write in their name(Obs make sure you spell it right)");
+                        Console.WriteLine("If you don't want to skip this part just type in 'Skip'");
                         // Ska lägga till ett annat val där användaren kan välja att lägga till eller avsluta programet från den här punkten.
                         string Search = Console.ReadLine();
-                        Console.WriteLine(Search);
                         bool FoundContact = false;
-                        foreach (Contact SearchContact in Contactlist)
+                        if(Search == "skip" || Search == "Skip")
                         {
-                            if (SearchContact.Name == Search)
+                            FoundContact = true;
+
+                        }
+                        else if (Search != "skip" || Search != "Skip")
+                        {
+
+                            foreach (Contact SearchContact in Contactlist)
                             {
-                                FoundContact = true;
-                                LastSelectedContact = SearchContact;// ifall om jag lägg till en funktion att ändra sin kontakt senare.
-                                Console.Write("\n{0}\n Phone number: {1} \n Email: {2} \n  ", SearchContact.Name, SearchContact.PhoneNumber, SearchContact.Email);
-                                if (SearchContact.Favorite == true)
+                                if (SearchContact.Name == Search)
                                 {
-                                    Console.Write("Contact type: Favorite");
+                                    FoundContact = true;
+                                    LastSelectedContact = SearchContact;// ifall om jag lägg till en funktion att ändra sin kontakt senare.
+                                    Console.Write("\n{0}\n Phone number: {1} \n Email: {2} \n  ", SearchContact.Name, SearchContact.PhoneNumber, SearchContact.Email);
+                                    if (SearchContact.Favorite == true)
+                                    {
+                                        Console.Write("Contact type: Favorite");
+                                    }
+                                    else
+                                    {
+                                        Console.Write("Contact type: General");
+                                    }
+                                    
                                 }
-                                else
-                                {
-                                    Console.Write("Contact type: General");
-                                }
-                                Tryagain = false;
                             }
                         }
                         
@@ -197,7 +206,7 @@ namespace Customer_Relation_Mangerment
 
                     } while (Tryagain == true);
 
-                    Current = false;
+                
                 }
                 Continue = false;
                 Console.WriteLine("\n\n What do you want to do now? \nBelow here is some option you can select from. Simply type in specific word marked with ' ' . \n");
@@ -226,13 +235,12 @@ namespace Customer_Relation_Mangerment
                     {
                         Console.WriteLine("Input data is incorrect! Please check your spelling and select one of the option listed below:");
                     }
-                } while (Continue == false); ;
+                } while (Continue == false); 
                 Console.ReadLine();
             }
 
 
             Console.ReadLine();
-            
             
                    
         }
