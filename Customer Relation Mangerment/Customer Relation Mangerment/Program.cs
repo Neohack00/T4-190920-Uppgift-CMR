@@ -13,10 +13,13 @@ namespace Customer_Relation_Mangerment
             Contact LastSelectedContact = new Contact();
             bool Tryagain = false;
             string val;
+            string NewContactChoice;
             bool Run = true;
             bool New = false;
             bool Current = false;
-            
+            bool Continue = false;
+
+
             System.Collections.ArrayList Contactlist = new System.Collections.ArrayList();
             Contactlist.Add(new Contact() { Name = "SOS", PhoneNumber = "112", Email = "112.Alarm@Sverige.se" , Favorite = false});
             Contactlist.Add(new Contact() { Name = "Taxi Stockholm", PhoneNumber = "08150000", Email = "kund@taxistockholm.se", Favorite = false });
@@ -53,12 +56,62 @@ namespace Customer_Relation_Mangerment
                 }
             } while (option == false);
             int FavoriteCount = 0;
+            string Firstname;
+            string Lastname;
+            string PhoneNumber;
+            string Email;
+            bool Favorite = false;
             while (Run == true)
             {
-                if(New == true)
+                Continue = false;
+                if (New == true)
                 {
-                    Console.WriteLine("Här kommer du kunna skapa en ny kontakt");
+
+                    do
+                    {
+                        Console.WriteLine("Här kommer du kunna skapa en ny kontakt");
+                        Console.WriteLine("New contact Firstname: ");
+                        Firstname = Console.ReadLine();
+                        Console.WriteLine("New contact Suename: ");
+                        Lastname = Console.ReadLine();
+                        Console.WriteLine("New contact Phone number: ");
+                        PhoneNumber = Console.ReadLine();
+                        Console.WriteLine("New contact Email: ");
+                        Email = Console.ReadLine();
+
+                        Console.WriteLine("\nName of the New Contact: {0} {1}", Firstname, Lastname);
+                        Console.WriteLine("Phone Number: {0} ", PhoneNumber);
+                        Console.WriteLine("Email: {0}", Email);
+                        Console.WriteLine("Is infomation you have put in correct? Yes or No?");
+                        NewContactChoice = Console.ReadLine();
+                    } while (NewContactChoice == "No" || NewContactChoice == "no" );
+                    do
+                    {
+                        Console.WriteLine("Do you wish to mark this contact as your favorite? Yes or No");
+                        NewContactChoice = Console.ReadLine();
+                        if(NewContactChoice == "Yes" ||NewContactChoice == "yes")
+                        {
+                            Favorite = true;
+                            Console.WriteLine("Your contact has been added to your favorites!");
+                            Continue = true;
+
+                        }
+                        else if(NewContactChoice == "No" || NewContactChoice == "no")
+                        {
+                            Continue = true;
+                        }
+                        else
+                        {
+                           Console.WriteLine("Wrong input data, try again. You only have two option choose from 'No' or 'Yes'.");
+                        }
+
+                    } while (Continue == false);
+                    string CompleteName = Firstname + " " + Lastname; 
+                    Contactlist.Add(new Contact() { Name = CompleteName , PhoneNumber = PhoneNumber, Email = Email , Favorite = Favorite});
                     
+                    Console.WriteLine("\nYou contact has been registered into the Contactlist, Thank you for using our CRM\n");
+                    // Användaren ska bli tillfrågad om den vill lägga till mer. Om nej vägleds den till Current vilken skriver ut listan av kontakter
+                    Current = true;
                 }
 
                 if (Current == true)
@@ -89,7 +142,8 @@ namespace Customer_Relation_Mangerment
                         }
                         Console.WriteLine("------------------"); ;
                         Console.WriteLine("You have total {0} contacts and {1} as marked favorite ", Contactlist.Count, FavoriteCount);
-                        Console.WriteLine("For more infamtion of an contact, write in there name. Obs make sure you spell it right");
+                        Console.WriteLine("For more information of an contact, write in their name. Obs make sure you spell it right");
+                        // Ska lägga till ett annat val där användaren kan välja att lägga till eller avsluta programet från den här punkten.
                         string Search = Console.ReadLine();
                         Console.WriteLine(Search);
                         bool FoundContact = false;
@@ -111,8 +165,8 @@ namespace Customer_Relation_Mangerment
                                 Tryagain = false;
                             }
                         }
-                            bool Continue = false;
-                            //problem hittad!! Varje gång foreach hittar ej något så skrivs felsökningen ut.
+                        
+                            
                         if (FoundContact == false) {
                             {
                                 Console.WriteLine("Contact could not be found! \n Make sure the spelling is right that include Capital letters and spaces");
@@ -121,7 +175,6 @@ namespace Customer_Relation_Mangerment
 
                                     Console.WriteLine("Would you like to try again?(yes or no)");
                                     val = Console.ReadLine();
-                                    Console.WriteLine(val);
                                     if (val == "yes" || val == "Yes")
                                     {
                                         Tryagain = true;
@@ -133,12 +186,10 @@ namespace Customer_Relation_Mangerment
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Wrong input data, try again. Check you spelling!?");
+                                        Console.WriteLine("Wrong input data, try again.");
                                     }
 
-                                } while (Continue == false);
-                                    
-                                
+                                } while (Continue == false);    
                             }
                         } 
 
@@ -146,7 +197,7 @@ namespace Customer_Relation_Mangerment
 
                     } while (Tryagain == true);
 
-
+                    Current = false;
                 }
                 Run = false;
             }
