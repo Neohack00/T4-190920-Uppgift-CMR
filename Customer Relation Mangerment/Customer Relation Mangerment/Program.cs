@@ -69,7 +69,7 @@ namespace Customer_Relation_Mangerment
 
                     do
                     {
-                        Console.WriteLine("Här kommer du kunna skapa en ny kontakt");
+                        Console.Clear();
                         Console.WriteLine("New contact Firstname: ");
                         Firstname = Console.ReadLine();
                         Console.WriteLine("New contact Suename: ");
@@ -78,7 +78,7 @@ namespace Customer_Relation_Mangerment
                         PhoneNumber = Console.ReadLine();
                         Console.WriteLine("New contact Email: ");
                         Email = Console.ReadLine();
-
+                        Console.Clear();
                         Console.WriteLine("\nName of the New Contact: {0} {1}", Firstname, Lastname);
                         Console.WriteLine("Phone Number: {0} ", PhoneNumber);
                         Console.WriteLine("Email: {0}", Email);
@@ -86,12 +86,13 @@ namespace Customer_Relation_Mangerment
                         NewContactChoice = Console.ReadLine();
                     } while (NewContactChoice == "No" || NewContactChoice == "no" );
                     do
-                    {
+                    {   
                         Console.WriteLine("Do you wish to mark this contact as your favorite? Yes or No");
                         NewContactChoice = Console.ReadLine();
                         if(NewContactChoice == "Yes" ||NewContactChoice == "yes")
                         {
                             Favorite = true;
+                            
                             Console.WriteLine("Your contact has been added to your favorites!");
                             Continue = true;
 
@@ -102,16 +103,15 @@ namespace Customer_Relation_Mangerment
                         }
                         else
                         {
-                           Console.WriteLine("Wrong input data, try again. You only have two option choose from 'No' or 'Yes'.");
+                            Console.Clear();
+                            Console.WriteLine("Wrong input data, try again. You only have two option choose from 'No' or 'Yes'.");
                         }
 
                     } while (Continue == false);
                     string CompleteName = Firstname + " " + Lastname; 
                     Contactlist.Add(new Contact() { Name = CompleteName , PhoneNumber = PhoneNumber, Email = Email , Favorite = Favorite});
-                    
+
                     Console.WriteLine("\nYou contact has been registered into the Contactlist, Thank you for using our CRM\n");
-                    // Användaren ska bli tillfrågad om den vill lägga till mer. Om nej vägleds den till Current vilken skriver ut listan av kontakter
-                    Current = true;
                 }
 
                 if (Current == true)
@@ -119,6 +119,8 @@ namespace Customer_Relation_Mangerment
 
                     do
                     {
+                        FavoriteCount = 0;
+                        Console.Clear();
                         Console.WriteLine("------------------");
                         Console.WriteLine("All Contacts: ");
                         Console.WriteLine("------------------");
@@ -140,11 +142,12 @@ namespace Customer_Relation_Mangerment
                                 FavoriteCount++;
                             }
                         }
+
                         Console.WriteLine("------------------"); ;
                         Console.WriteLine("You have total {0} contacts and {1} as marked favorite ", Contactlist.Count, FavoriteCount);
                         Console.WriteLine("For more information of an contact, write in their name(Obs make sure you spell it right)");
                         Console.WriteLine("If you don't want to skip this part just type in 'Skip'");
-                        // Ska lägga till ett annat val där användaren kan välja att lägga till eller avsluta programet från den här punkten.
+                        
                         string Search = Console.ReadLine();
                         bool FoundContact = false;
                         if(Search == "skip" || Search == "Skip")
@@ -159,6 +162,7 @@ namespace Customer_Relation_Mangerment
                             {
                                 if (SearchContact.Name == Search)
                                 {
+                                    Console.Clear();
                                     FoundContact = true;
                                     LastSelectedContact = SearchContact;// ifall om jag lägg till en funktion att ändra sin kontakt senare.
                                     Console.Write("\n{0}\n Phone number: {1} \n Email: {2} \n  ", SearchContact.Name, SearchContact.PhoneNumber, SearchContact.Email);
@@ -170,7 +174,8 @@ namespace Customer_Relation_Mangerment
                                     {
                                         Console.Write("Contact type: General");
                                     }
-                                    
+                                    Console.WriteLine("\n Press enter to continue");
+                                    Console.ReadLine();
                                 }
                             }
                         }
@@ -178,6 +183,7 @@ namespace Customer_Relation_Mangerment
                             
                         if (FoundContact == false) {
                             {
+                                Console.Clear();
                                 Console.WriteLine("Contact could not be found! \n Make sure the spelling is right that include Capital letters and spaces");
                                 do
                                 {
@@ -195,6 +201,7 @@ namespace Customer_Relation_Mangerment
                                     }
                                     else
                                     {
+                                        Console.Clear();
                                         Console.WriteLine("Wrong input data, try again.");
                                     }
 
@@ -209,6 +216,7 @@ namespace Customer_Relation_Mangerment
                 
                 }
                 Continue = false;
+                Console.Clear();
                 Console.WriteLine("\n\n What do you want to do now? \nBelow here is some option you can select from. Simply type in specific word marked with ' ' . \n");
                 Current = false;
                 New = false;
@@ -233,15 +241,15 @@ namespace Customer_Relation_Mangerment
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("Input data is incorrect! Please check your spelling and select one of the option listed below:");
                     }
                 } while (Continue == false); 
-                Console.ReadLine();
+                
             }
 
-
-            Console.ReadLine();
-            
+            Console.Clear();
+            Console.WriteLine("Goodbye!");
                    
         }
 
