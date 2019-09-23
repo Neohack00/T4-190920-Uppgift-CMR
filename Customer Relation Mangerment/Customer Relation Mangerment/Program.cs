@@ -153,6 +153,7 @@ namespace Customer_Relation_Mangerment
                         if(Search == "skip" || Search == "Skip")
                         {
                             FoundContact = true;
+                            Tryagain = false;
 
                         }
                         else if (Search != "skip" || Search != "Skip")
